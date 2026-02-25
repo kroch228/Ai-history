@@ -1,3 +1,25 @@
+:root {
+    /* Frans Hals Museum Inspired Palette */
+    --bg-color: #E8C9A0;
+    /* Sand/Beige Background */
+    --card-bg: #1A3A3A;
+    /* Dark Teal Cards */
+    --card-hover: #132a2a;
+    /* Darker Teal for hover */
+    --text-primary: #1A3A3A;
+    /* Dark Teal for headings on beige */
+    --text-card: #F5D7A8;
+    /* Light Sand for titles on cards */
+    --text-card-muted: rgba(255, 255, 255, 0.7);
+    /* Muted white for subtext */
+    --accent: #F5D7A8;
+    /* Light Sand for buttons */
+    --accent-hover: #E5C494;
+    /* Slightly darker sand for button hover */
+    --border-color: #1A3A3A;
+    /* Solid dark border */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,121 +27,201 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
     min-height: 100vh;
-    color: #eee;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 40px;
+    flex: 1;
 }
 
 header {
     text-align: center;
-    padding: 40px 20px;
-    margin-bottom: 40px;
+    padding: 80px 0 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    text-transform: uppercase;
 }
 
 .subtitle {
-    font-size: 1.2em;
-    color: #aaa;
-    letter-spacing: 2px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: inline-block;
 }
 
 .files-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding-bottom: 100px;
 }
 
 .file-card {
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-    padding: 20px: blur(10;
-    backdrop-filterpx);
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px 24px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    /* Starting state for animation */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, background-color 0.3s ease;
+}
+
+/* Intersection Observer Class applied via JS */
+.file-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .file-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background-color: var(--card-hover);
 }
 
 .file-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
+    font-size: 3rem;
+    margin-bottom: 24px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.file-card:hover .file-icon {
+    transform: scale(1.1);
+}
+
+.file-info {
+    text-align: center;
+    margin-bottom: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .file-info h3 {
-    font-size: 1.1em;
+    font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: 8px;
-    color: #fff;
+    line-height: 1.4;
+    color: var(--text-card);
 }
 
 .file-size {
-    color: #888;
-    font-size: 0.9em;
-    margin-bottom: 15px;
+    color: var(--text-card-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
 .file-actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
+    width: 100%;
+    flex-direction: column;
+}
+
+@media (min-width: 480px) {
+    .file-actions {
+        flex-direction: row;
+    }
 }
 
 .btn {
     flex: 1;
-    padding: 10px 15px;
+    padding: 12px 10px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    font-weight: bold;
-    transition: background 0.3s;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
 }
 
 .btn-view {
-    background: #e94560;
-    color: white;
+    background: var(--accent);
+    color: var(--text-primary);
 }
 
 .btn-view:hover {
-    background: #ff6b6b;
+    background: var(--accent-hover);
 }
 
 .btn-download {
-    background: #0f3460;
-    color: white;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .btn-download:hover {
-    background: #1a4a7a;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 footer {
     text-align: center;
-    padding: 40px 20px;
-    color: #666;
+    padding: 40px 0;
+    margin-top: auto;
+    border-top: 1px solid rgba(26, 58, 58, 0.15);
+    /* Subtle dark teal border */
 }
 
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
+footer p {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 60px 0 40px;
     }
-    
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .file-icon {
+        font-size: 2.5rem;
+    }
+
     .files-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
     }
 }
